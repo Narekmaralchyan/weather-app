@@ -6,12 +6,12 @@ import DailyWeatherItem from "./DailyWeatherItem";
 const WeatherDaily = () => {
     const {temperatureUnit, location} = useAppSelector(state => state.temperature);
 
-    const {data} = useGetDailyWeatherQuery({tempUnit: temperatureUnit, location});
+    const {data,isError,isFetching} = useGetDailyWeatherQuery({tempUnit: temperatureUnit, location});
 
     return (
         <SWeatherDaily>
             {
-                data?.list && (
+                (!isFetching && !isError ) && !!data?.list &&  (
                     data.list.map(
                         item => (
                             <DailyWeatherItem
